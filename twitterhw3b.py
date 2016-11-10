@@ -8,6 +8,7 @@
 # Be prepared to change the search term during demo.
 
 import tweepy
+from textblob import TextBlob
 
 owner = "The_Real_NW"
 owner_id = "4854852197"
@@ -22,9 +23,12 @@ auth.set_access_token(access_token, access_token_secret)
 api = tweepy.API(auth)
 
 search = input("What would you like to search for?")
-results = api.search(q=search)
+for tweet in tweepy.Cursor(api.search, q=search, result_type = 'recent', include_entities=True,lang = 'en').items(100):
+  print (tweet.text)
+  
 
-for result in results:
-    print (result.text)
-print("Average subjectivity is")
-print("Average polarity is")
+text = TextBlob(tweet.text)
+subjectivity = text.sentiment.subjectivity
+polarity = text.sentiment.polarity
+print("Average subjectivity is", subjectivity)
+print("Average polarity is", polarity)
