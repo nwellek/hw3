@@ -30,5 +30,5 @@ for tweet in tweepy.Cursor(api.search, q=search, result_type = 'recent', include
 text = TextBlob(tweet.text)
 subjectivity = text.sentiment.subjectivity
 polarity = text.sentiment.polarity
-print("Average subjectivity is", subjectivity)
-print("Average polarity is", polarity)
+print("Average subjectivity: ", subjectivity)
+print("Average polarity: ", polarity)

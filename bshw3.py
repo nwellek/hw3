@@ -13,7 +13,25 @@
 import requests
 from urllib.request import urlopen
 from bs4 import BeautifulSoup
-base_url = 'https://www.si.umich.edu/programs/bachelor-science-information/bsi-admissions'
+
+
+base_url = 'http://collemc.people.si.umich.edu/data/bshw3StarterFile.html'
 r = requests.get(base_url)
+f = open('bshw3.html', "w")
 soup = BeautifulSoup(r.text, "lxml")
-#NAte 
+
+student = soup.findAll(text = "student")
+
+for item in student:
+	txt = re.sub("student", "AMAZING student", item)
+	item.replace_with(txt)
+
+for img in soup.findAll('img'):
+	if img.get('alt') == None:
+		img['src'] = "Nate.png"
+
+for img in soup.find_all("img"):
+	img['src'] = "logo.png"
+
+f.write(soup.encode("ascii", "ignore").decode("utf-8"))
+f.close()
