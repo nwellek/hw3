@@ -4,9 +4,11 @@
 
 # You will demo this live for grading.
 import tweepy
-owner = "The_Real_NW"
+owner = "The_Real_NW"  #my infor to match with Twitter
 owner_id = "4854852197"
-access_token =  "4854852197-8jZvoSQi6f7gl8U6w3BLrra3k2mCcCvVF0ssp27"
+
+#variables required by Twitter to then access and post tweetes
+access_token =  "4854852197-8jZvoSQi6f7gl8U6w3BLrra3k2mCcCvVF0ssp27" 
 access_token_secret = "e232GRiCiMXz4BrKFFTXWyUT4eDzTeh4SvBmYqGEPGjiN"
 consumer_key = "HMDEZrAd2HZaNmIypzJohbkCT"
 consumer_secret = "EaqKH4HWP9749QAEQ6wIspK1awlKYYcKTzeeqPIdf3afZEra23"
@@ -28,9 +30,9 @@ def main():
     }
 
   api = get_api(cfg)
-  tweet = "My name Nate #UMSI-206 #Proj3"
-  status = api.update_with_media("206.jpg", tweet) 
-  # Yes, tweet is called 'status' rather confusing
+  tweet = "My name Nate #UMSI-206 #Proj3" #code to be posted
+  status = api.update_with_media("206.jpg", tweet) #adding image to code
+
 
 if __name__ == "__main__":
   main()

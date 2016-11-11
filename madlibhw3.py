@@ -18,7 +18,7 @@ from nltk.book import text2
 from nltk import word_tokenize,sent_tokenize
 
 
-params =  text2[:151]
+params =  text2[:151] 
 
 debug = False #True
 if debug:
@@ -47,6 +47,6 @@ for (word, tag) in tagged_tokens:
     final_words.append(spaced(new_word))
 
 
-print (''.join(final_words))
+print (''.join(final_words)) #prings changed words in the text
 print("\n\nEND*******")
 

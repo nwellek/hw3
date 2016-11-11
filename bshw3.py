@@ -13,25 +13,30 @@
 import requests
 from urllib.request import urlopen
 from bs4 import BeautifulSoup
+import re
 
-
+#basic beatiful soup format wiht baseurl
 base_url = 'http://collemc.people.si.umich.edu/data/bshw3StarterFile.html'
 r = requests.get(base_url)
 f = open('bshw3.html', "w")
 soup = BeautifulSoup(r.text, "lxml")
 
-student = soup.findAll(text = "student")
 
-for item in student:
-	txt = re.sub("student", "AMAZING student", item)
-	item.replace_with(txt)
+#finds all items that are "students and then replaces it with AMAZING student"
+for item in soup.find_all(text = re.compile("student")):
+	word = str(item)
+	word = word.replace("student", "AMAZING student")
+	item.replaceWith(word)
 
 for img in soup.findAll('img'):
-	if img.get('alt') == None:
+	if img['src'] == "https://testbed.files.wordpress.com/2012/09/bsi_exposition_041316_192.jpg": #specific current jpg that in then changed to the image of myself
 		img['src'] = "Nate.png"
+	else:
+		img['src'] = "media/logo.png" #all other images changed to picture(logo.png)
 
-for img in soup.find_all("img"):
-	img['src'] = "logo.png"
 
-f.write(soup.encode("ascii", "ignore").decode("utf-8"))
+my_string = str(soup)
+
+
+f.write(str(soup)) #writes and completes the soup, saving it to html in the same directory
 f.close()
